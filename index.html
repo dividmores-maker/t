@@ -1667,6 +1667,28 @@ tr:hover td {
 </style>
 
 <!-- LOGIN SCREEN -->
+<!-- Early function proxies — defined here so onclick handlers work before the main script loads -->
+<script>
+  function switchLoginRole(role) {
+    if (window._switchLoginRole) return window._switchLoginRole(role);
+    // Minimal fallback until main script loads
+    var tabs = document.querySelectorAll('.login-tab');
+    tabs.forEach(function(t, i) {
+      t.classList.toggle('active', (role === 'admin' && i === 0) || (role === 'viewer' && i === 1));
+    });
+    var label = document.getElementById('login-pass-label');
+    if (label) label.textContent = role === 'admin' ? 'كلمة سر المدير' : 'كلمة سر المتفرج';
+    var inp = document.getElementById('login-pass-input');
+    if (inp) inp.value = '';
+    window._pendingLoginRole = role;
+  }
+  function doLogin() {
+    if (window._doLogin) return window._doLogin();
+    // If main script not ready yet, wait and retry
+    setTimeout(function() { if (window._doLogin) window._doLogin(); }, 300);
+  }
+</script>
+
 <div id="login-screen">
   <!-- Background orbs -->
   <div class="login-orb" style="width:500px;height:500px;background:rgba(124,111,247,0.25);top:-120px;right:-100px;animation-duration:10s;"></div>
@@ -1809,8 +1831,6 @@ tr:hover td {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 </div>
-
-<body>
 
 <!-- ===================== MOBILE HEADER ===================== -->
 <div class="mobile-header" id="mobile-header" style="display:none;">
@@ -2845,7 +2865,7 @@ const PASSWORDS = {
 };
 
 let currentRole = null; // 'admin' | 'viewer'
-let loginRoleSelected = 'admin';
+let loginRoleSelected = window._pendingLoginRole || 'admin';
 
 function switchLoginRole(role) {
   loginRoleSelected = role;
@@ -5010,6 +5030,8 @@ function showViewerError(msg) {
 }
 
 // ===== EXPOSE TO GLOBAL SCOPE =====
+window._doLogin = doLogin;
+window._switchLoginRole = switchLoginRole;
 window.doLogin = doLogin;
 window.doLogout = doLogout;
 window.switchLoginRole = switchLoginRole;
