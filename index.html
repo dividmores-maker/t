@@ -4641,7 +4641,7 @@ function exportAttendancePDF() {
     td{padding:9px 12px;border-bottom:1px solid #e5e7eb;}
     tr:nth-child(even) td{background:#f9f9ff;}
     @media print{body{margin:15px;}}
-  </style></head><body>
+  <\/style><\/head><body>
   <h1>🎵 تقرير الحضور — كورال ${currentChoir}</h1>
   <div class="sub">تاريخ التقرير: ${now.getDate()} ${arMonths[now.getMonth()]} ${now.getFullYear()}</div>
   <div class="summary">
@@ -4651,7 +4651,7 @@ function exportAttendancePDF() {
   </div>
   <table><thead><tr><th>الاسم</th><th>حاضر</th><th>غائب</th><th>الإجمالي</th><th>النسبة</th></tr></thead>
   <tbody>${rows}</tbody></table>
-  </body></html>`;
+  <\/body><\/html>`;
 
   const win = window.open('', '_blank');
   win.document.write(html);
@@ -4692,12 +4692,12 @@ function exportSchedulePDF() {
     td{padding:9px 12px;border-bottom:1px solid #e5e7eb;}
     tr:nth-child(even) td{background:#f9f9ff;}
     @media print{body{margin:15px;}}
-  </style></head><body>
+  <\/style><\/head><body>
   <h1>📅 جدول البروفات والحفلات — كورال ${currentChoir}</h1>
   <div class="sub">تاريخ التقرير: ${now.getDate()} ${arMonths[now.getMonth()]} ${now.getFullYear()}</div>
   <table><thead><tr><th>النوع</th><th>العنوان</th><th>التاريخ</th><th>الوقت</th><th>المكان</th><th>الفريق</th></tr></thead>
   <tbody>${rows}</tbody></table>
-  </body></html>`;
+  <\/body><\/html>`;
 
   const win = window.open('', '_blank');
   win.document.write(html);
