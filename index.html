@@ -2943,7 +2943,7 @@ let currentChoir = null;
 let members = [], songs = [], schedules = [], attRecords = [], concerts = [];
 let activeGroup = 'all';
 let pendingFile = null;
-const GITHUB_SONGS_BASE = 'https://raw.githubusercontent.com/dividmores-maker/asret-altasbeh/main/songs/';
+const GITHUB_SONGS_BASE = 'https://raw.githubusercontent.com/dividmores-maker/t/main/songs/';
 
 function previewGithubFile(val) {
   const preview = document.getElementById('s-github-preview');
@@ -2953,7 +2953,7 @@ function previewGithubFile(val) {
   const ext = val.split('.').pop().toLowerCase();
   const isAudio = ['mp3','wav','m4a','ogg','aac'].includes(ext);
   if (isAudio) {
-    preview.innerHTML = '<audio controls src="' + url + '" style="width:100%;border-radius:8px;" onerror="this.parentElement.innerHTML='<div style=color:#e06bb5;font-size:12px;>❌ الملف مش موجود على GitHub</div>'"></audio>';
+    preview.innerHTML = '<audio controls src="' + url + '" style="width:100%;border-radius:8px;" onerror="this.parentElement.innerHTML=\'<div style=&quot;color:#e06bb5;font-size:12px;&quot;>&#x274C; الملف مش موجود على GitHub<\/div>\'"></audio>';
   } else {
     preview.innerHTML = '<div style="font-size:11px;color:#3dd68c;">🔗 ' + url + '</div>';
   }
